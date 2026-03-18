@@ -8,18 +8,16 @@ const TraCuuVanBang = (props: any) => {
   const [result, setResult] = useState<any>(null);
 
   const handleSearch = (values: any) => {
-    // 1. Loại bỏ khoảng trắng đầu cuối và lọc bỏ các trường rỗng
     const cleanValues: any = {};
     Object.keys(values).forEach((key) => {
       const val = values[key];
       if (typeof val === 'string') {
-        cleanValues[key] = val.trim(); // Trim khoảng trắng
+        cleanValues[key] = val.trim(); 
       } else {
         cleanValues[key] = val;
       }
     });
 
-    // 2. Kiểm tra xem người dùng đã nhập ít nhất 2 tham số chưa
     const filledParams = Object.values(cleanValues).filter((v) => v !== undefined && v !== '').length;
 
     if (filledParams < 2) {
@@ -27,7 +25,6 @@ const TraCuuVanBang = (props: any) => {
       return;
     }
 
-    // 3. Logic tìm kiếm (Tìm chính xác hoặc tìm theo tên)
     const found = diplomas.find((item: any) => {
       return (
         (cleanValues.soHieuVB && item.soHieuVB === cleanValues.soHieuVB) ||
@@ -42,7 +39,6 @@ const TraCuuVanBang = (props: any) => {
       setResult(found);
       message.success('Tìm thấy thông tin văn bằng!');
 
-      // 4. Ghi nhận lượt tra cứu theo quyết định tốt nghiệp
       const newDecisions = decisions.map((qd: any) => {
         if (qd.id === found.quyetDinhId) {
           return { ...qd, luotTraCuu: (qd.luotTraCuu || 0) + 1 };
@@ -85,7 +81,7 @@ const TraCuuVanBang = (props: any) => {
             <Descriptions.Item label="Quyết định tốt nghiệp">
               {decisions.find((d: any) => d.id === result.quyetDinhId)?.soQD || 'N/A'}
             </Descriptions.Item>
-            {/* Hiển thị các trường thông tin động đã cấu hình */}
+            {}
             {Object.keys(result.duLieuDong || {}).map((key) => (
               <Descriptions.Item key={key} label={key}>{result.duLieuDong[key]}</Descriptions.Item>
             ))}

@@ -1,6 +1,6 @@
 import { PageContainer } from '@ant-design/pro-layout';
 import { Tabs } from 'antd';
-import { useModel } from 'umi'; // Hook quan trọng nhất của Umi
+import { useModel } from 'umi'; 
 import CauHinhBieuMau from './CauHinhBieuMau';
 import ThongTinVanBang from './ThongTinVanBang';
 import TraCuuVanBang from './TraCuuVanBang';
